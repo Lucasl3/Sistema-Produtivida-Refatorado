@@ -11,7 +11,12 @@ public class Alunos extends Colaboradores {
 
     public Alunos(String tipo) {
         this.tipo = tipo;
-
+        
+    }
+    
+    public Alunos(){
+        tentaCriarColaborador = new criaAluno();
+        
     }
 
     public String getTipo() {

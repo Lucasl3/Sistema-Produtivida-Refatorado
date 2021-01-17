@@ -18,6 +18,7 @@ public class Colaboradores{
     private ArrayList<Publicacoes> publicacoes = new ArrayList<Publicacoes>();
     private static int numeroColaboradores = 0;
     private int numeroProjetosAndamento = 0;
+    public CriaColaborador tentaCriarColaborador;
 
     Scanner teclado = new Scanner(System.in);
 
@@ -101,6 +102,10 @@ public class Colaboradores{
         return "";
     }
 
+    public Colaboradores tentaCriaColaborador(){
+        return tentaCriarColaborador.criaColaborador();
+    }
+
     public boolean nomeDisponivel(String nome){
         ArrayList<Colaboradores> colaboradores = LaboratorioPesquisa.colaboradores;
         for(int i = 0;i < colaboradores.size();i++){
@@ -112,7 +117,7 @@ public class Colaboradores{
     }
 
     //Pega os dados nome e email ao fazer o cadastro do colaborador
-    private void dadosColaborador(Colaboradores colaborador){
+    public void dadosColaborador(Colaboradores colaborador){
 
         System.out.print("Digite o nome do colaborador: ");
         String nome = nomeDisponivelException();
@@ -138,30 +143,33 @@ public class Colaboradores{
 
         int option = (int)Administrador.lerNumero();
 
-        String tipo;
         switch(option){
             case 1:
-                Alunos aluno = Alunos.escolhaTipoAluno();
-                dadosColaborador(aluno);
-                tipo = "Aluno de " + aluno.getTipo();
-                setTipoColaborador(tipo, aluno);
-                Orientacoes.incrementaNumeroAlunos();
-                System.out.println(tipo + " inserido com sucesso!");
+                Colaboradores aluno = new Alunos();
+                aluno = aluno.tentaCriaColaborador();
+                // Alunos aluno = Alunos.escolhaTipoAluno();
+                // dadosColaborador(aluno);
+                // tipo = "Aluno de " + aluno.getTipo();
+                // setTipoColaborador(tipo, aluno);
+                // Orientacoes.incrementaNumeroAlunos();
+                // System.out.println(tipo + " inserido com sucesso!");
                 numeroColaboradores++;
                 return aluno;
             case 2:
-                Professores professor = new Professores();
-                dadosColaborador(professor);
-                setTipoColaborador("Professor", professor);
-                Orientacoes.incrementaNumeroProfessores();
-                System.out.println("Professor inserido com sucesso!");
+                Colaboradores professor = new Professores();
+                professor = professor.tentaCriaColaborador();
+                // dadosColaborador(professor);
+                // setTipoColaborador("Professor", professor);
+                // Orientacoes.incrementaNumeroProfessores();
+                // System.out.println("Professor inserido com sucesso!");
                 numeroColaboradores++;
                 return professor;
             case 3:
-                Pesquisadores pesquisador = new Pesquisadores();
-                dadosColaborador(pesquisador);
-                setTipoColaborador("Pesquisador", pesquisador);
-                System.out.println("Pesquisador inserido com sucesso!");
+                Colaboradores pesquisador = new Pesquisadores();
+                pesquisador = pesquisador.tentaCriaColaborador();
+                // dadosColaborador(pesquisador);
+                // setTipoColaborador("Pesquisador", pesquisador);
+                // System.out.println("Pesquisador inserido com sucesso!");
                 numeroColaboradores++;
                 return pesquisador;
             default:
