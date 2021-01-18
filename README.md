@@ -21,3 +21,5 @@ No terminal
 ## Designs patterns aplicados
 #### Strategy
 > Foi aplicado na criação dos colaboradores, onde cada tipo de colaborador tem um metódo específico para ser criado, com o strategy, o metódo de criação é especificado no constructor de cada colaborador, portanto, é apenas necessário a chamada de uma função única para a criação do colaborador.
+#### Chain of Responsibility
+> Foi aplicado na criação de um projeto, temos uma cadeia sequencial de dados que são necessários para a criação de um projeto e enquanto um dos dados não for autorizado ou validado, o sistema irá ficar em loop até o usuário fornecer um dado satisfatório para aquela entrada e então partirá para o próximo, até que todos os dados sejam coletados e portanto seja possível a criação do projeto.
