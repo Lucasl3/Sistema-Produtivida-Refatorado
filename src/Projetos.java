@@ -241,11 +241,6 @@ public class Projetos {
         System.out.print("Título do projeto: ");
         String titulo = tituloDisponivelException();
 
-        // while (!tituloDisponivel(titulo)) {
-        //     System.out.println("Título indisponível. Digite outro: ");
-        //     titulo = Administrador.lerString();
-        // }
-
         System.out.print("Data de início, digite no formato 'dd/mm/yyyy': ");
         String dataInicio = Administrador.lerString();
 
@@ -280,6 +275,24 @@ public class Projetos {
         insereProjetoOrdenado(novoProjeto, laboratorio);
 
 
+    }
+
+    public static void alocaColaboradorProjeto(Colaboradores colaborador, Projetos projeto){
+        if(colaborador.getTipoColaborador().equals("Aluno de graduação") && colaborador.getNumeroProjetosAndamento() == 2 && projeto.getStatus().equals("Em andamento")){
+            System.out.println("Esse aluno não pode ser alocado a mais um projeto em andamento. Esse aluno só pode participar de 2 projetos em andamento.");
+            return;
+        }
+
+        if(projeto.getStatus().equals("Em andamento")){
+            colaborador.setNumeroProjetosAndamento(1);
+        }
+        
+        projeto.participantes.add(colaborador);
+        colaborador.addProjetosColaboradores(projeto);
+
+        System.out.println(colaborador.getNome() + " foi alocado para o projeto " + projeto.titulo);        
+
+        if (colaborador.getTipoColaborador() == "Professor") projeto.setTrocaStatus(true);
     }
 
     public static void alocarColaborador(LaboratorioPesquisa lab) {
@@ -320,23 +333,7 @@ public class Projetos {
         
         Projetos projeto = projetos.get(indexProjeto);
 
-        if(colaborador.getTipoColaborador().equals("Aluno de graduação") && colaborador.getNumeroProjetosAndamento() == 2 && projeto.getStatus().equals("Em andamento")){
-            System.out.println("Esse aluno não pode ser alocado a mais um projeto em andamento. Esse aluno só pode participar de 2 projetos em andamento.");
-            return;
-        }
-
-        if(projeto.getStatus().equals("Em andamento")){
-            colaborador.setNumeroProjetosAndamento(1);
-        }
-        
-        projeto.participantes.add(colaborador);
-        colaborador.addProjetosColaboradores(projeto);
-
-        System.out.println(colaborador.getNome() + " foi alocado para o projeto " + projeto.titulo);        
-
-        if (colaborador.getTipoColaborador() == "Professor") projeto.setTrocaStatus(true);
-        
-
+        alocaColaboradorProjeto(colaborador, projeto);
     }
 
     public static void listaProjetos() {
@@ -344,6 +341,33 @@ public class Projetos {
             System.out.println("Projeto " + (i + 1));
             System.out.println("Título: " + projetos.get(i).titulo);
             System.out.println("Status: " + projetos.get(i).status);
+        }
+    }
+
+    public static void mudaStatusProjeto(int option, Projetos projeto){
+        if (option == 1 && projeto.trocaStatus) {
+            if(alunoGraduacaoValido(projeto)) {
+                numeroProjetosElaboracao--;
+                numeroProjetosAndamento++;
+                projeto.setStatus("Em andamento");
+                System.out.println("Projeto " + projeto.titulo + ": status trocado para 'Em andamento'.");
+            } else {
+                System.out.println("Não é possível fazer a troca do status. Há aluno(s) de graduação em 2 projetos em andamento.");
+            }
+            return;
+        } else if (option == 1 && !projeto.trocaStatus) {
+            System.out.println("O projeto deve ter ao menos um professor para ter seu status trocado.");
+        }
+
+        if (option == 2 && projeto.publicacoes.size() != 0 && projeto.trocaStatus) {
+            numeroProjetosAndamento--;
+            numeroProjetosConcluido++;
+            casoAlunoGraduacao(projeto);
+            projeto.setStatus("Concluído");
+            System.out.println("Projeto " + projeto.titulo + ": status trocado para '" + projeto.getStatus() + "'.");
+        } else if (option == 2 && projeto.publicacoes.size() == 0 && projeto.trocaStatus) {
+            System.out
+                    .println("O projeto deve ter ao menos uma publicação para ter seu status alterado para concluído");
         }
     }
 
@@ -373,31 +397,7 @@ public class Projetos {
         System.out.println("[2] Alterar status para 'Concluído'.");
 
         int option = (int)Administrador.lerNumero();
-
-        if (option == 1 && projeto.trocaStatus) {
-            if(alunoGraduacaoValido(projeto)) {
-                numeroProjetosElaboracao--;
-                numeroProjetosAndamento++;
-                projeto.setStatus("Em andamento");
-                System.out.println("Projeto " + projeto.titulo + ": status trocado para 'Em andamento'.");
-            } else {
-                System.out.println("Não é possível fazer a troca do status. Há aluno(s) de graduação em 2 projetos em andamento.");
-            }
-            return;
-        } else if (option == 1 && !projeto.trocaStatus) {
-            System.out.println("O projeto deve ter ao menos um professor para ter seu status trocado.");
-        }
-
-        if (option == 2 && projeto.publicacoes.size() != 0 && projeto.trocaStatus) {
-            numeroProjetosAndamento--;
-            numeroProjetosConcluido++;
-            casoAlunoGraduacao(projeto);
-            projeto.setStatus("Concluído");
-            System.out.println("Projeto " + projeto.titulo + ": status trocado para '" + projeto.getStatus() + "'.");
-        } else if (option == 2 && projeto.publicacoes.size() == 0 && projeto.trocaStatus) {
-            System.out
-                    .println("O projeto deve ter ao menos uma publicação para ter seu status alterado para concluído");
-        }
+        mudaStatusProjeto(option, projeto);
     }
 
     public static void casoAlunoGraduacao(Projetos projeto) {
