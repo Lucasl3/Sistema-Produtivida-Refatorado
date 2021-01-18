@@ -3,7 +3,7 @@ package src.Colaboradores;
 import src.Orientacoes;
 
 public interface CriaColaborador {
-    Colaboradores criaColaborador();
+    public Colaboradores criaColaborador();
 
 }
 

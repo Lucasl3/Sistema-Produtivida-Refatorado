@@ -147,29 +147,16 @@ public class Colaboradores{
             case 1:
                 Colaboradores aluno = new Alunos();
                 aluno = aluno.tentaCriaColaborador();
-                // Alunos aluno = Alunos.escolhaTipoAluno();
-                // dadosColaborador(aluno);
-                // tipo = "Aluno de " + aluno.getTipo();
-                // setTipoColaborador(tipo, aluno);
-                // Orientacoes.incrementaNumeroAlunos();
-                // System.out.println(tipo + " inserido com sucesso!");
                 numeroColaboradores++;
                 return aluno;
             case 2:
                 Colaboradores professor = new Professores();
                 professor = professor.tentaCriaColaborador();
-                // dadosColaborador(professor);
-                // setTipoColaborador("Professor", professor);
-                // Orientacoes.incrementaNumeroProfessores();
-                // System.out.println("Professor inserido com sucesso!");
                 numeroColaboradores++;
                 return professor;
             case 3:
                 Colaboradores pesquisador = new Pesquisadores();
                 pesquisador = pesquisador.tentaCriaColaborador();
-                // dadosColaborador(pesquisador);
-                // setTipoColaborador("Pesquisador", pesquisador);
-                // System.out.println("Pesquisador inserido com sucesso!");
                 numeroColaboradores++;
                 return pesquisador;
             default:
