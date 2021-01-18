@@ -17,3 +17,5 @@ No terminal
  Depois de ter o repósitorio clonado, execute o arquivo src/Administrador.java
 
 ---
+
+## Designs patterns aplicados
