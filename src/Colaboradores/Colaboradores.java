@@ -5,9 +5,9 @@ import java.util.Scanner;
 
 import src.Administrador;
 import src.LaboratorioPesquisa;
-import src.Orientacoes;
 import src.Projetos;
 import src.Publicacoes;
+import src.Colaboradores.Strategy.CriaColaborador;
 import src.CustomExceptions.NomeDisponivelException;
 
 public class Colaboradores{

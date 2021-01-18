@@ -3,6 +3,7 @@ package src.Colaboradores;
 import java.util.Scanner;
 
 import src.Administrador;
+import src.Colaboradores.Strategy.CriaAluno;
 
 public class Alunos extends Colaboradores { 
     public String tipo;
@@ -15,7 +16,7 @@ public class Alunos extends Colaboradores {
     }
     
     public Alunos(){
-        tentaCriarColaborador = new criaAluno();
+        tentaCriarColaborador = new CriaAluno();
         
     }
 
@@ -23,7 +24,7 @@ public class Alunos extends Colaboradores {
         return tipo;
     }
 
-    static Alunos escolhaTipoAluno() {
+    public static Alunos escolhaTipoAluno() {
 
         System.out.println("Qual o tipo de aluno?");
         System.out.println("[1] - Aluno de graduação");
