@@ -21,3 +21,7 @@ No terminal
 ## Designs patterns aplicados
 #### Strategy
 > Foi aplicado na criação dos colaboradores, onde cada tipo de colaborador tem um metódo específico para ser criado, com o strategy, o metódo de criação é especificado no constructor de cada colaborador, portanto, é apenas necessário a chamada de uma função única para todos os colaboradores.
+<<<<<<< HEAD
+=======
+
+>>>>>>> d6bad48862d56de29611b9a83539f2df8302471c
