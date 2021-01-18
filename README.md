@@ -19,3 +19,6 @@ No terminal
 ---
 
 ## Designs patterns aplicados
+# Markdown
+- #### Strategy
+
